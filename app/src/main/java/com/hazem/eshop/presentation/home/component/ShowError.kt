@@ -20,12 +20,10 @@ import com.hazem.eshop.R
 @Composable
 fun ShowError(
     message: String,
-    padding: PaddingValues
 ) {
     Box(
         modifier = Modifier
             .fillMaxSize()
-            .padding(padding)
     ) {
         Column(
             modifier = Modifier.align(Alignment.Center),
@@ -48,5 +46,5 @@ fun ShowError(
 @Preview
 @Composable
 fun ShowErrorPreview() {
-    ShowError(message = "No Internet Connection", padding = PaddingValues(10.dp))
+    ShowError(message = "No Internet Connection")
 }

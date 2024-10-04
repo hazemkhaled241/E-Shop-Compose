@@ -81,7 +81,7 @@ dependencies {
     implementation (libs.logging.interceptor)
 
     // Coil
-    implementation("io.coil-kt:coil-compose:2.5.0")
+    implementation(libs.coil.compose)
 
 
     testImplementation(libs.junit)

@@ -8,7 +8,7 @@ class HomeUseCase @Inject constructor(
     private val homeRepository: HomeRepository
 ) {
 
-   suspend fun  getAllProducts(): ApiResponse {
+   suspend operator fun  invoke(): ApiResponse {
        return homeRepository.getAllProducts()
    }
 }
