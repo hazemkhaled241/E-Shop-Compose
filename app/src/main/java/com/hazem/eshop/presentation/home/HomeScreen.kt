@@ -14,49 +14,50 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
+import androidx.navigation.NavHostController
 import com.hazem.eshop.presentation.home.component.ProductItem
 import com.hazem.eshop.presentation.home.component.ShowError
 import com.hazem.eshop.presentation.home.component.SimpleTopAppBar
 
 
 @Composable
-fun HomeScreen(homeViewModel: HomeViewModel = hiltViewModel()) {
+fun HomeScreen(homeViewModel: HomeViewModel = hiltViewModel(), navController: NavHostController) {
     val state = homeViewModel.products.value
 
 
 
     Column(modifier = Modifier.fillMaxSize()) {
-       SimpleTopAppBar(title = "eShop")
+        SimpleTopAppBar(title = "eShop")
 
 
-    Box(modifier = Modifier.fillMaxSize()) {
-        if (state.products.isNotEmpty()) {
-            LazyVerticalGrid(
-                columns = GridCells.Adaptive(150.dp),
-                modifier = Modifier
-                    .background(MaterialTheme.colorScheme.surfaceVariant)
-            ) {
+        Box(modifier = Modifier.fillMaxSize()) {
+            if (state.products.isNotEmpty()) {
+                LazyVerticalGrid(
+                    columns = GridCells.Adaptive(150.dp),
+                    modifier = Modifier
+                        .background(MaterialTheme.colorScheme.surfaceVariant)
+                ) {
 
-                items(state.products) { product ->
-                    ProductItem(product = product)
+                    items(state.products) { product ->
+                        ProductItem(product = product,navController)
+                    }
                 }
             }
+
+            if (state.isLoading) {
+                CircularProgressIndicator(
+                    modifier = Modifier.align(Alignment.Center),
+                    color = MaterialTheme.colorScheme.primary
+                )
+            }
+
+            if (state.errorMessage.isNotBlank())
+                ShowError(message = state.errorMessage)
+
         }
 
-        if (state.isLoading) {
-            CircularProgressIndicator(
-                modifier = Modifier.align(Alignment.Center),
-                color = MaterialTheme.colorScheme.primary
-            )
-        }
-
-        if (state.errorMessage.isNotBlank())
-            ShowError(message = state.errorMessage)
 
     }
-
-
-}
 
 
 }

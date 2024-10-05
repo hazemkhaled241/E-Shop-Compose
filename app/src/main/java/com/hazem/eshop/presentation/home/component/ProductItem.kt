@@ -33,14 +33,18 @@ import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.navigation.NavHostController
+import androidx.navigation.compose.rememberNavController
 import coil.compose.rememberAsyncImagePainter
 import com.hazem.eshop.R
 import com.hazem.eshop.domain.model.home.Product
 import com.hazem.eshop.domain.model.home.Rating
+import com.hazem.eshop.utils.Screen
 
 @Composable
 fun ProductItem(
-    product: Product
+    product: Product,
+    navController: NavHostController
 ) {
     Card(
         modifier = Modifier
@@ -48,7 +52,7 @@ fun ProductItem(
             .width(213.dp)
             .padding(6.dp)
             .clickable {
-                //navigate to details screen
+                navController.navigate(Screen.DetailsScreen.passProductId(product.id))
             },
         colors = CardDefaults.cardColors(
             containerColor = Color.White
@@ -140,6 +144,7 @@ fun ProductItemPreview() {
             price = 2.1,
             rating = Rating(count = 1, rate = 2.5),
             title = "Fjallraven - Foldsack No. 1 Backpack, Fits 15 Laptops"
-        )
+        ),
+        navController = rememberNavController()
     )
 }
