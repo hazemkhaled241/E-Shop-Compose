@@ -3,4 +3,6 @@
     <string name="Product_Image">Product Image</string>
     <string name="shopping_cart_icon">Shopping Cart Icon</string>
     <string name="error_image">Error Image</string>
+    <string name="back_icon">Back Icon</string>
+    <string name="star_icon">Star Icon</string>
 </resources>
