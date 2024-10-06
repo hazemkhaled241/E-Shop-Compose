@@ -3,6 +3,7 @@ plugins {
     alias(libs.plugins.jetbrainsKotlinAndroid)
     id("com.google.dagger.hilt.android")
     id("kotlin-parcelize")
+    kotlin("plugin.serialization") version "1.9.23"
     kotlin("kapt")
 }
 
@@ -68,9 +69,10 @@ dependencies {
     implementation(libs.androidx.lifecycle.runtime.compose)
 
     //navigation in compose
-    val navigationVersion = "2.8.1"
     implementation(libs.androidx.hilt.navigation.compose)
     implementation(libs.androidx.hilt.navigation.compose)
+    implementation (libs.androidx.navigation.compose)
+    implementation(libs.kotlinx.serialization.json)
 
     implementation(libs.hilt.android)
     kapt(libs.hilt.android.compiler)

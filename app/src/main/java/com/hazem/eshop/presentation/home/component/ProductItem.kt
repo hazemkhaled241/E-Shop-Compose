@@ -39,7 +39,7 @@ import coil.compose.rememberAsyncImagePainter
 import com.hazem.eshop.R
 import com.hazem.eshop.domain.model.home.Product
 import com.hazem.eshop.domain.model.home.Rating
-import com.hazem.eshop.utils.Screen
+import com.hazem.eshop.presentation.navigation.Screen
 
 @Composable
 fun ProductItem(
@@ -52,7 +52,7 @@ fun ProductItem(
             .width(213.dp)
             .padding(6.dp)
             .clickable {
-                navController.navigate(Screen.DetailsScreen.passProductId(product.id))
+                navController.navigate(Screen.DetailsScreen(product))
             },
         colors = CardDefaults.cardColors(
             containerColor = Color.White

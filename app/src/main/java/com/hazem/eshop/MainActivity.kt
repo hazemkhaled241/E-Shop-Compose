@@ -7,17 +7,18 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
 import androidx.compose.ui.Modifier
-import androidx.navigation.NavType
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
-import androidx.navigation.navArgument
+import androidx.navigation.toRoute
+import com.hazem.eshop.domain.model.home.Product
 import com.hazem.eshop.presentation.details.DetailsScreen
 import com.hazem.eshop.presentation.home.HomeScreen
+import com.hazem.eshop.presentation.navigation.CustomNavType
 import com.hazem.eshop.presentation.ui.theme.EShopTheme
-import com.hazem.eshop.utils.Constants.PRODUCT_ID
-import com.hazem.eshop.utils.Screen
+import com.hazem.eshop.presentation.navigation.Screen
 import dagger.hilt.android.AndroidEntryPoint
+import kotlin.reflect.typeOf
 
 @AndroidEntryPoint
 class MainActivity : ComponentActivity() {
@@ -34,18 +35,20 @@ class MainActivity : ComponentActivity() {
 
                     NavHost(
                         navController = navController,
-                        startDestination = Screen.HomeScreen.route
+                        startDestination = Screen.HomeScreen
                     ) {
-                        composable(route = Screen.HomeScreen.route) {
-                            HomeScreen(navController=navController)
+                        composable<Screen.HomeScreen> {
+                            HomeScreen(navController = navController)
                         }
-                        composable(
-                            route = Screen.DetailsScreen.route,
-                            arguments = listOf(navArgument(PRODUCT_ID) {
-                                type = NavType.IntType
-                            })
-                        ) {
-                            DetailsScreen(navController)
+                        composable<Screen.DetailsScreen>(
+                            typeMap = mapOf(
+                                typeOf<Product>() to CustomNavType.ProductType,
+
+                                )
+                        )
+                        {
+                            val argument = it.toRoute<Screen.DetailsScreen>()
+                            DetailsScreen(product = argument.product, navController = navController)
                         }
                     }
 

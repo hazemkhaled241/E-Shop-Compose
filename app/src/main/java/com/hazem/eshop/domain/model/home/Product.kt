@@ -1,10 +1,10 @@
 package com.hazem.eshop.domain.model.home
 
-import android.os.Parcelable
 import com.google.gson.annotations.SerializedName
-import kotlinx.parcelize.Parcelize
+import kotlinx.serialization.Serializable
 
-@Parcelize
+
+@Serializable
 data class Product(
     @SerializedName("category")
     val category: String,
@@ -20,4 +20,4 @@ data class Product(
     val rating: Rating,
     @SerializedName("title")
     val title: String
-) : Parcelable
+)
